@@ -1,0 +1,1 @@
+import{p as a,R as r}from"./index-B5lAVCDJ.js";import{b as t,c as o}from"./index-DIs4CkQ_.js";const f=a(r.RULES),c=a([]),l=a([]),n=async()=>{const{data:s}=await t(),{data:e}=await o();c.value=s.rules,l.value=Object.values(e.providers)};export{f as a,c as b,n as f,l as r};
