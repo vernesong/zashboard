@@ -16,6 +16,21 @@
   }
 }
 
+.custom-background {
+  .card {
+    @apply bg-base-100/90;
+  }
+  .collapse {
+    @apply bg-base-100/90;
+  }
+  .table {
+    @apply bg-base-100/90;
+  }
+  .drawer-side {
+    @apply bg-base-200/90;
+  }
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }

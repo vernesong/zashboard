@@ -118,6 +118,7 @@ const ru: LANG_MESSAGE = {
   globalIP: 'IP для Мира',
   networkInfo: 'Информация о сети',
   autoSwitch: 'Автоматическое',
+  customBackgroundURL: 'Пользовательский URL фона',
 }
 
 export default ru

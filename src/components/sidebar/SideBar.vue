@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer-side z-30">
+  <div class="drawer-side z-30 bg-base-200">
     <label
       for="sidebar"
       aria-label="close sidebar"
@@ -8,7 +8,7 @@
     <div
       :class="
         twMerge(
-          'scrollbar-hidden flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content !transition-all duration-500',
+          'scrollbar-hidden flex h-full flex-col gap-2 overflow-x-hidden p-2 text-base-content !transition-all duration-500',
           isSidebarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
         )
       "

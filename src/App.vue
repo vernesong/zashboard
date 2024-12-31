@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { XCircleIcon } from '@heroicons/vue/24/outline'
+import dayjs from 'dayjs'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useTip } from './composables/tip'
 import { FONTS } from './config'
-import { font, theme } from './store/settings'
+import { customBackgroundURL, font, theme } from './store/settings'
 
 const app = ref<HTMLElement>()
 const setThemeColor = () => {
@@ -31,13 +32,15 @@ const fontClassMap = {
   [FONTS.SYSTEM_UI]: 'font-SystemUI',
 }
 const fontClassName = computed(() => fontClassMap[font.value])
+const date = dayjs().format('YYYY-MM-DD')
 </script>
 
 <template>
   <div
     ref="app"
-    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName}`"
+    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} ${customBackgroundURL && 'custom-background bg-cover'}`"
     :data-theme="theme"
+    :style="`background-image: url('${customBackgroundURL + '?' + date}');`"
   >
     <RouterView />
     <div

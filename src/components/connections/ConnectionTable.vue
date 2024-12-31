@@ -4,7 +4,7 @@
     class="h-full overflow-y-auto p-2"
   >
     <div :style="{ height: `${totalSize}px` }">
-      <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">
+      <table :class="`table table-zebra bg-base-100 ${sizeOfTable} rounded-none shadow-md`">
         <thead class="sticky -top-2 z-10 bg-base-100">
           <tr
             v-for="headerGroup in table.getHeaderGroups()"

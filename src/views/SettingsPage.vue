@@ -50,6 +50,13 @@
             </option>
           </select>
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('customBackgroundURL') }}:
+          <input
+            class="input input-sm input-bordered min-w-64"
+            v-model="customBackgroundURL"
+          />
+        </div>
         <div
           class="flex items-center gap-2"
           v-if="!isSingBox"
@@ -174,6 +181,7 @@ import {
   autoConnectionCheck,
   autoIPCheck,
   autoUpgrade,
+  customBackgroundURL,
   font,
   logRetentionLimit,
   theme,

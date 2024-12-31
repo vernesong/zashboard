@@ -116,6 +116,7 @@ const zh: LANG_MESSAGE = {
   globalIP: '全球 IP',
   networkInfo: '网络信息',
   autoSwitch: '自动切换',
+  customBackgroundURL: '自定义背景 URL',
 }
 
 export default zh

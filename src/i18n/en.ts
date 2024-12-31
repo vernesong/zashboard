@@ -115,6 +115,7 @@ const en = {
   globalIP: 'Global IP',
   networkInfo: 'Network Info',
   autoSwitch: 'Auto Switch',
+  customBackgroundURL: 'Custom Background URL',
 }
 
 export type LANG_MESSAGE = typeof en
