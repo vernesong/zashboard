@@ -43,11 +43,11 @@
 </template>
 
 <script setup lang="ts">
-import { upgradeCoreAPI } from '@/api'
-import { handlerUpgradeSuccess } from '@/helper'
-import { fetchConfigs } from '@/store/config'
-import { fetchProxies } from '@/store/proxies'
-import { fetchRules } from '@/store/rules'
+import { upgradeCoreAPI } from '@renderer/api'
+import { handlerUpgradeSuccess } from '@renderer/helper'
+import { fetchConfigs } from '@renderer/store/config'
+import { fetchProxies } from '@renderer/store/proxies'
+import { fetchRules } from '@renderer/store/rules'
 import { ref } from 'vue'
 import DialogWrapper from '../common/DialogWrapper.vue'
 

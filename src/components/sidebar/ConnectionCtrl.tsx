@@ -1,17 +1,3 @@
-import { disconnectAllAPI, disconnectByIdAPI } from '@/api'
-import { SORT_DIRECTION, SORT_TYPE } from '@/constant'
-import { useTooltip } from '@/helper/tooltip'
-import {
-  connectionFilter,
-  connections,
-  connectionSortDirection,
-  connectionSortType,
-  isPaused,
-  quickFilterEnabled,
-  quickFilterRegex,
-  renderConnections,
-} from '@/store/connections'
-import { useConnectionCard } from '@/store/settings'
 import {
   ArrowDownCircleIcon,
   ArrowUpCircleIcon,
@@ -21,6 +7,20 @@ import {
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
+import { disconnectAllAPI, disconnectByIdAPI } from '@renderer/api'
+import { SORT_DIRECTION, SORT_TYPE } from '@renderer/constant'
+import { useTooltip } from '@renderer/helper/tooltip'
+import {
+  connectionFilter,
+  connections,
+  connectionSortDirection,
+  connectionSortType,
+  isPaused,
+  quickFilterEnabled,
+  quickFilterRegex,
+  renderConnections,
+} from '@renderer/store/connections'
+import { useConnectionCard } from '@renderer/store/settings'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DialogWrapper from '../common/DialogWrapper.vue'

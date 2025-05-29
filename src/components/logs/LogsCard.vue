@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { useBounceOnVisible } from '@/composables/bouncein'
-import { LOG_LEVEL } from '@/constant'
-import type { LogWithSeq } from '@/types'
+import { useBounceOnVisible } from '@renderer/composables/bouncein'
+import { LOG_LEVEL } from '@renderer/constant'
+import type { LogWithSeq } from '@renderer/types'
 import { computed } from 'vue'
 
 const props = defineProps<{

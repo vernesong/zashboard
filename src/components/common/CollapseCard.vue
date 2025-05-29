@@ -29,9 +29,9 @@
 </template>
 
 <script setup lang="ts">
-import { collapsedBus } from '@/composables/bus'
-import { SCROLLABLE_PARENT_CLASS } from '@/helper/utils'
-import { collapseGroupMap } from '@/store/settings'
+import { collapsedBus } from '@renderer/composables/bus'
+import { SCROLLABLE_PARENT_CLASS } from '@renderer/helper/utils'
+import { collapseGroupMap } from '@renderer/store/settings'
 import { computed, onUnmounted, ref } from 'vue'
 
 const props = defineProps<{

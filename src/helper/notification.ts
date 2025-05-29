@@ -1,4 +1,4 @@
-import { i18n } from '@/i18n'
+import { i18n } from '@renderer/i18n'
 import { type Ref } from 'vue'
 
 const t = i18n.global.t

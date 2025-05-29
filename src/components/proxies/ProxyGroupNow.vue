@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { PROXY_TYPE } from '@/constant'
-import { useTooltip } from '@/helper/tooltip'
-import { getNowProxyNodeName, proxyMap } from '@/store/proxies'
-import { displayFinalOutbound } from '@/store/settings'
 import { ArrowRightCircleIcon, CheckCircleIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
+import { PROXY_TYPE } from '@renderer/constant'
+import { useTooltip } from '@renderer/helper/tooltip'
+import { getNowProxyNodeName, proxyMap } from '@renderer/store/proxies'
+import { displayFinalOutbound } from '@renderer/store/settings'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ProxyName from './ProxyName.vue'

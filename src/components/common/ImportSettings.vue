@@ -79,18 +79,18 @@
 
 <script setup lang="ts">
 import {
-  autoImportSettings,
-  DEFAULT_SETTINGS_URL,
-  importSettingsFromUrl,
-  importSettingsUrl,
-} from '@/helper/autoImportSettings'
-import { showNotification } from '@/helper/notification'
-import { useTooltip } from '@/helper/tooltip'
-import {
   ArrowDownTrayIcon,
   ArrowUpCircleIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/vue/24/outline'
+import {
+  autoImportSettings,
+  DEFAULT_SETTINGS_URL,
+  importSettingsFromUrl,
+  importSettingsUrl,
+} from '@renderer/helper/autoImportSettings'
+import { showNotification } from '@renderer/helper/notification'
+import { useTooltip } from '@renderer/helper/tooltip'
 import { ref } from 'vue'
 import DialogWrapper from './DialogWrapper.vue'
 import TextInput from './TextInput.vue'

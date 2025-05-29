@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useCalculateMaxProxies } from '@/composables/calculateMaxProxies'
-import { handlerProxySelect, proxyProviederList } from '@/store/proxies'
+import { useCalculateMaxProxies } from '@renderer/composables/calculateMaxProxies'
+import { handlerProxySelect, proxyProviederList } from '@renderer/store/proxies'
 import { computed } from 'vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
 import ProxyNodeGrid from './ProxyNodeGrid.vue'
@@ -47,8 +47,8 @@ const { maxProxies } = useCalculateMaxProxies()
       :key="index"
     >
       <p
-        class="my-2 text-sm font-semibold"
         v-if="providerName !== ''"
+        class="my-2 text-sm font-semibold"
       >
         {{ providerName }}
       </p>

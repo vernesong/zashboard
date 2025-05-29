@@ -51,11 +51,11 @@
 </template>
 
 <script setup lang="ts">
-import { getIPFromIpipnetAPI, getIPInfo } from '@/api/geoip'
-import { ipForChina, ipForGlobal } from '@/composables/overview'
-import { useTooltip } from '@/helper/tooltip'
-import { autoIPCheck, IPInfoAPI } from '@/store/settings'
 import { BoltIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
+import { getIPFromIpipnetAPI, getIPInfo } from '@renderer/api/geoip'
+import { ipForChina, ipForGlobal } from '@renderer/composables/overview'
+import { useTooltip } from '@renderer/helper/tooltip'
+import { autoIPCheck, IPInfoAPI } from '@renderer/store/settings'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 

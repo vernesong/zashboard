@@ -1,5 +1,5 @@
-import { renderRoutes } from '@/helper'
-import { activeBackend } from '@/store/setup'
+import { renderRoutes } from '@renderer/helper'
+import { activeBackend } from '@renderer/store/setup'
 import { computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 

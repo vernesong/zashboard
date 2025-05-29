@@ -5,14 +5,18 @@
       :key="stat"
       :class="className.item"
     >
-      <div :class="className.label">{{ $t(stat) }}</div>
-      <div :class="className.value">{{ statisticsMap[stat] }}</div>
+      <div :class="className.label">
+        {{ $t(stat) }}
+      </div>
+      <div :class="className.value">
+        {{ statisticsMap[stat] }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { STATISTICS_TYPE, statisticsMap } from '@/composables/statistics'
+import { STATISTICS_TYPE, statisticsMap } from '@renderer/composables/statistics'
 import { computed } from 'vue'
 
 const props = defineProps<{

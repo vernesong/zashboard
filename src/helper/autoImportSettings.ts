@@ -1,4 +1,4 @@
-import { showNotification } from '@/helper/notification'
+import { showNotification } from '@renderer/helper/notification'
 import { useStorage } from '@vueuse/core'
 const IMPORT_SETTINGS_URL_KEY = 'config/import-settings-url'
 

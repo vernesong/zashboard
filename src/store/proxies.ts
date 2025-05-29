@@ -7,7 +7,7 @@ import {
   fetchProxyProviderAPI,
   isSingBox,
   selectProxyAPI,
-} from '@/api'
+} from '@renderer/api'
 import {
   GLOBAL,
   IPV6_TEST_URL,
@@ -15,12 +15,12 @@ import {
   PROXY_TAB_TYPE,
   PROXY_TYPE,
   TEST_URL,
-} from '@/constant'
-import { isProxyGroup } from '@/helper'
-import { showNotification } from '@/helper/notification'
-import type { Proxy, ProxyProvider } from '@/types'
+} from '@renderer/constant'
+import { isProxyGroup } from '@renderer/helper'
+import { showNotification } from '@renderer/helper/notification'
+import type { Proxy, ProxyProvider } from '@renderer/types'
 import { useStorage } from '@vueuse/core'
-import { last } from 'lodash'
+import { last } from 'lodash-es'
 import { computed, ref } from 'vue'
 import { activeConnections } from './connections'
 import {
@@ -279,7 +279,8 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
     if (proxyNode.fixed) {
       deleteFixedProxyAPI(proxyGroupName)
     }
-    return testLatencyOneByOneWithTip(all, url)
+    await testLatencyOneByOneWithTip(all, url)
+    return
   }
 
   const timeout = Math.max(5000, speedtestTimeout.value)

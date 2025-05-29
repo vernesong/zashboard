@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, type Ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
+import BinaryInstallModal from './components/modals/BinaryInstallModal.vue'
+import { useBinary } from './composables/binary'
 import { useKeyboard } from './composables/keyboard'
 import { EMOJIS, FONTS } from './constant'
 import { autoImportSettings, importSettingsFromUrl } from './helper/autoImportSettings'
 import { backgroundImage } from './helper/indexeddb'
 import { initNotification } from './helper/notification'
-import { isPreferredDark } from './helper/utils'
+import { isDarkTheme, isPreferredDark } from './helper/utils'
 import {
   blurIntensity,
   dashboardTransparent,
@@ -44,6 +46,7 @@ const fontClassName = computed(() => {
     FONT_CLASS_MAP[emoji.value]?.[font.value] || FONT_CLASS_MAP[EMOJIS.TWEMOJI][FONTS.SYSTEM_UI]
   )
 })
+const { showBinaryInstallModal, checkAndInstallBinary, handleBinaryInstallConfirm } = useBinary()
 
 const setThemeColor = () => {
   const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
@@ -80,11 +83,16 @@ onMounted(() => {
     () => {
       document.body.setAttribute('data-theme', theme.value)
       setThemeColor()
+      isDarkTheme.value =
+        getComputedStyle(document.body).getPropertyValue('color-scheme') === 'dark'
     },
     {
       immediate: true,
     },
   )
+
+  // 检查二进制安装状态
+  checkAndInstallBinary()
 })
 
 const blurClass = computed(() => {
@@ -100,8 +108,8 @@ useKeyboard()
 
 <template>
   <div
-    ref="app"
     id="app-content"
+    ref="app"
     :class="[
       'bg-base-100 flex h-dvh w-screen overflow-x-hidden',
       fontClassName,
@@ -115,6 +123,11 @@ useKeyboard()
     <div
       ref="toast"
       class="toast-sm toast toast-end toast-top z-9999 max-w-96 text-sm md:translate-y-8"
+    />
+
+    <BinaryInstallModal
+      v-if="showBinaryInstallModal"
+      @confirm="handleBinaryInstallConfirm"
     />
   </div>
 </template>

@@ -4,8 +4,8 @@
       <span>{{ index }}.</span>
       <span class="ml-2">{{ rule.type }}</span>
       <span
-        class="text-main ml-2"
         v-if="rule.payload"
+        class="text-main ml-2"
       >
         {{ rule.payload }}
       </span>
@@ -54,23 +54,19 @@
 </template>
 
 <script setup lang="ts">
-import { updateRuleProviderAPI } from '@/api'
-import { useBounceOnVisible } from '@/composables/bouncein'
-import { NOT_CONNECTED } from '@/constant'
-import { getColorForLatency } from '@/helper'
-import { useTooltip } from '@/helper/tooltip'
-import { getLatencyByName, getNowProxyNodeName, proxyMap } from '@/store/proxies'
-import { fetchRules, ruleProviderList } from '@/store/rules'
-import { displayLatencyInRule, displayNowNodeInRule } from '@/store/settings'
-import type { Rule } from '@/types'
-import {
-  ArrowPathIcon,
-  ArrowRightCircleIcon,
-  QuestionMarkCircleIcon,
-} from '@heroicons/vue/24/outline'
+import { ArrowPathIcon, ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import { updateRuleProviderAPI } from '@renderer/api'
+import { useBounceOnVisible } from '@renderer/composables/bouncein'
+import { NOT_CONNECTED } from '@renderer/constant'
+import { getColorForLatency } from '@renderer/helper'
+import { getLatencyByName, getNowProxyNodeName, proxyMap } from '@renderer/store/proxies'
+import { fetchRules, ruleProviderList } from '@renderer/store/rules'
+import { displayLatencyInRule, displayNowNodeInRule } from '@renderer/store/settings'
+import type { Rule } from '@renderer/types'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useTooltip } from '../../helper/tooltip'
 import ProxyName from '../proxies/ProxyName.vue'
 
 const props = defineProps<{
