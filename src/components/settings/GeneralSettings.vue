@@ -50,6 +50,17 @@
           />
         </div>
 
+        <div class="flex items-center gap-2">
+          {{ $t('sidebarPosition') }}
+          <select
+            class="select select-sm min-w-24"
+            v-model="sidebarPosition"
+          >
+            <option value="left">{{ $t('left') }}</option>
+            <option value="right">{{ $t('right') }}</option>
+          </select>
+        </div>
+
         <div class="flex items-center gap-2 md:hidden">
           {{ $t('scrollAnimationEffect') }}
           <input
@@ -120,6 +131,7 @@ import {
   displayAllFeatures,
   IPInfoAPI,
   scrollAnimationEffect,
+  sidebarPosition,
   swipeInPages,
   swipeInTabs,
 } from '@/store/settings'

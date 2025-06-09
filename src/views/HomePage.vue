@@ -1,6 +1,6 @@
 <template>
   <div class="bg-base-200/50 home-page flex size-full">
-    <SideBar v-if="!isMiddleScreen" />
+    <SideBar v-if="!isMiddleScreen && sidebarPosition === 'left'" />
     <RouterView v-slot="{ Component, route }">
       <div
         class="flex flex-1 flex-col overflow-hidden"
@@ -57,6 +57,7 @@
         </template>
       </div>
     </RouterView>
+    <SideBar v-if="!isMiddleScreen && sidebarPosition === 'right'" />
 
     <DialogWrapper v-model="autoSwitchBackendDialog">
       <h3 class="text-lg font-bold">{{ $t('currentBackendUnavailable') }}</h3>
@@ -98,7 +99,7 @@ import { initLogs } from '@/store/logs'
 import { initSatistic } from '@/store/overview'
 import { fetchProxies, proxiesTabShow } from '@/store/proxies'
 import { fetchRules, rulesTabShow } from '@/store/rules'
-import { isSidebarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed, sidebarPosition } from '@/store/settings'
 import { activeBackend, activeUuid, backendList } from '@/store/setup'
 import type { Backend } from '@/types'
 import { useDocumentVisibility } from '@vueuse/core'

@@ -197,7 +197,7 @@ const ru: LANG_MESSAGE = {
   IPInfoAPI: 'API информации о IP',
   IPInfoAPITip:
     'Этот API будет использоваться для проверки IP-адресов при запросах информации о глобальных узлах, определения геолокации IP-адресов в деталях соединения, а также для определения геолокации IP-адресов при DNS-запросах в панели.',
-  general: 'Универсальный',
+  general: 'Общие',
   groupProxiesByProvider: 'Группировать прокси по провайдеру',
   RarelyUsed: 'Редко используется',
   OccasionalUsed: 'Временно используется',
@@ -210,6 +210,9 @@ const ru: LANG_MESSAGE = {
   customGlobalNode: 'Пользовательский глобальный узел',
   proxiesRelationship: 'Отношение прокси',
   displayProxiesRelationship: 'Показать отношение прокси',
+  sidebarPosition: 'Положение боковой панели',
+  left: 'Слева',
+  right: 'Справа',
 }
 
 export default ru

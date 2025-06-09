@@ -38,7 +38,10 @@
             class="btn btn-circle btn-sm bg-base-300"
             @click="isSidebarCollapsed = false"
           >
-            <ArrowRightCircleIcon class="h-5 w-5" />
+            <component
+              :is="sidebarPosition === 'left' ? ArrowRightCircleIcon : ArrowLeftCircleIcon"
+              class="h-5 w-5"
+            />
           </button>
         </div>
       </template>
@@ -69,8 +72,12 @@ import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/constant'
 import { renderRoutes } from '@/helper'
 import { useTooltip } from '@/helper/tooltip'
 import router from '@/router'
-import { isSidebarCollapsed, showStatisticsWhenSidebarCollapsed } from '@/store/settings'
-import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import {
+  isSidebarCollapsed,
+  showStatisticsWhenSidebarCollapsed,
+  sidebarPosition,
+} from '@/store/settings'
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'

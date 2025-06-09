@@ -207,6 +207,9 @@ const zh: LANG_MESSAGE = {
   customGlobalNode: '自定义全局节点',
   proxiesRelationship: '节点关系',
   displayProxiesRelationship: '显示节点关系',
+  sidebarPosition: '侧边栏位置',
+  left: '左侧',
+  right: '右侧',
 }
 
 export default zh

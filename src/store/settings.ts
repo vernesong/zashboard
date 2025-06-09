@@ -76,6 +76,7 @@ export const isSidebarCollapsed = computed({
     isSidebarCollapsedConfig.value = value
   },
 })
+export const sidebarPosition = useStorage<'left' | 'right'>('config/sidebar-position', 'left')
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const customBackgroundURL = useStorage('config/custom-background-image', '')
 export const dashboardTransparent = useStorage('config/dashboard-transparent', 90)

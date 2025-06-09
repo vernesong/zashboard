@@ -208,6 +208,9 @@ const en = {
   customGlobalNode: 'Custom Global Node',
   proxiesRelationship: 'Proxies Relationship',
   displayProxiesRelationship: 'Display Proxies Relationship',
+  sidebarPosition: 'Sidebar Position',
+  left: 'Left',
+  right: 'Right',
 }
 
 export type LANG_MESSAGE = typeof en

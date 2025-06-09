@@ -13,7 +13,10 @@
         class="btn btn-circle btn-sm"
         @click="isSidebarCollapsed = true"
       >
-        <ArrowLeftCircleIcon class="h-5 w-5" />
+        <component
+          :is="sidebarPosition === 'left' ? ArrowLeftCircleIcon : ArrowRightCircleIcon"
+          class="h-5 w-5"
+        />
       </button>
       <div class="flex-1"></div>
       <BackendSwitch />
@@ -22,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import { isSidebarCollapsed } from '@/store/settings'
-import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
+import { isSidebarCollapsed, sidebarPosition } from '@/store/settings'
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import BackendVersion from '../common/BackendVersion.vue'
 import StatisticsStats from '../overview/StatisticsStats.vue'
 import BackendSwitch from '../settings/BackendSwitch.vue'
