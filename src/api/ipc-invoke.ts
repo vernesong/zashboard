@@ -15,6 +15,7 @@ import {
   SET_SYSTEM_PROXY,
   START_CORE,
   STOP_CORE,
+  TRAY_STORE_UPDATED,
   UNINSTALL_BINARY,
   UNSET_SYSTEM_PROXY,
   UPDATE_PROFILE,
@@ -110,4 +111,8 @@ export const updateSettingsAPI = async (key: string, value: string): Promise<voi
 
 export const clearRuntimeDirAPI = async (): Promise<void> => {
   return await api.invoke(CLEAR_RUNTIME_DIR)
+}
+
+export const updateTrayStoreAPI = async (key: string, value: unknown): Promise<void> => {
+  return await api.invoke(TRAY_STORE_UPDATED, { key, value: JSON.stringify(value) })
 }

@@ -141,7 +141,7 @@ const handleProfileSave = async () => {
   if (!props.profileUuid) return
 
   profileContent.value = profileContent.value.trim()
-  writeProfileContentAPI(props.profileUuid, profileContent.value)
+  await writeProfileContentAPI(props.profileUuid, profileContent.value)
   await updateProfile({
     ...profile.value,
     uuid: props.profileUuid,
@@ -151,7 +151,6 @@ const handleProfileSave = async () => {
     type: 'alert-success',
     timeout: 2000,
   })
-  initProfile()
 }
 
 watch(

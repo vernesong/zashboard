@@ -40,7 +40,6 @@ import { ROUTE_ICON_MAP, ROUTE_NAME } from '@renderer/constant'
 import { renderRoutes } from '@renderer/helper'
 import { useTooltip } from '@renderer/helper/tooltip'
 import router from '@renderer/router'
-import { isSidebarCollapsed } from '@renderer/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -51,7 +50,6 @@ const { showTip } = useTooltip()
 const { t } = useI18n()
 
 const mouseenterHandler = (e: MouseEvent, r: string) => {
-  if (!isSidebarCollapsed.value) return
   showTip(e, t(r), {
     placement: 'right',
   })

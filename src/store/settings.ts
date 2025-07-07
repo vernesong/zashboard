@@ -17,7 +17,7 @@ import {
   TEST_URL,
   type THEME,
 } from '@renderer/constant'
-import { getMinCardWidth, isMiddleScreen, isPreferredDark } from '@renderer/helper/utils'
+import { getMinCardWidth, isPreferredDark } from '@renderer/helper/utils'
 import type { SourceIPLabel } from '@renderer/types'
 import { useStorage } from '@vueuse/core'
 import { computed } from 'vue'
@@ -41,19 +41,7 @@ export const language = useStorage<LANG>(
     ? (navigator.language as LANG)
     : LANG.EN_US,
 )
-export const isSidebarCollapsedConfig = useStorage('config/is-sidebar-collapsed', true)
-export const isSidebarCollapsed = computed({
-  get: () => {
-    if (isMiddleScreen.value) {
-      return true
-    }
 
-    return isSidebarCollapsedConfig.value
-  },
-  set: (value) => {
-    isSidebarCollapsedConfig.value = value
-  },
-})
 const fontConfig = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const font = computed({
   get: () => {

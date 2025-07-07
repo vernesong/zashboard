@@ -15,6 +15,7 @@ import './helper/syncSettings'
 import { i18n } from './i18n'
 import router from './router'
 import './store/status'
+import './store/tray'
 
 applyCustomThemes()
 loadFonts()
