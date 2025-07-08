@@ -6,31 +6,37 @@
   >
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="text-lg font-bold">{{ $t('editProfile') }} </span>
-        <input
-          v-model="profile.name"
-          class="input input-sm w-48 font-normal"
-        />
-        <span
-          v-if="isModified"
-          class="text-info text-xs opacity-75"
-        >
-          ({{ $t('unsaved') }})
+        <span class="text-lg font-bold">
+          {{ props.isPreviewMode ? $t('runtimeConfig') : $t('editProfile') }}
         </span>
+        <template v-if="!props.isPreviewMode">
+          <input
+            v-model="profile.name"
+            class="input input-sm w-48 font-normal"
+          />
+          <span
+            v-if="isModified"
+            class="text-info text-xs opacity-75"
+          >
+            ({{ $t('unsaved') }})
+          </span>
+        </template>
       </div>
       <div class="flex items-center gap-2">
-        <button
-          class="btn btn-sm btn-primary"
-          @click="handleProfileSave"
-        >
-          {{ $t('save') }}
-        </button>
-        <button
-          class="btn btn-sm btn-neutral"
-          @click="handleProfileReset"
-        >
-          {{ $t('reset') }}
-        </button>
+        <template v-if="!props.isPreviewMode">
+          <button
+            class="btn btn-sm btn-primary"
+            @click="handleProfileSave"
+          >
+            {{ $t('save') }}
+          </button>
+          <button
+            class="btn btn-sm btn-neutral"
+            @click="handleProfileReset"
+          >
+            {{ $t('reset') }}
+          </button>
+        </template>
         <button
           class="btn btn-sm"
           @click="isVisible = false"
@@ -44,10 +50,14 @@
       v-model:value="profileContent"
       :theme="isDarkTheme ? 'vs-dark' : 'vs'"
       language="json"
+      :options="{
+        readOnly: props.isPreviewMode,
+        minimap: { enabled: !props.isPreviewMode },
+      }"
       @change="handleProfileChange"
     />
     <div
-      v-if="profile.type === 'remote'"
+      v-if="profile.type === 'remote' && !props.isPreviewMode"
       class="flex items-center justify-end gap-2 text-sm"
     >
       <span> url </span>
@@ -86,15 +96,21 @@ import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { useNotification } from '@renderer/composables/notification'
 import { isDarkTheme } from '@renderer/helper/utils'
 import { ref, watch } from 'vue'
-import { getProfileContentAPI, writeProfileContentAPI } from '../../api/ipc-invoke'
+import {
+  getProfileContentAPI,
+  getRuntimeProfileContentAPI,
+  writeProfileContentAPI,
+} from '../../api/ipc-invoke'
 import { profileList, updateProfile } from '../../store/profiles'
 
 interface Props {
   profileUuid?: string
+  isPreviewMode?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   profileUuid: '',
+  isPreviewMode: false,
 })
 
 const isVisible = defineModel<boolean>('modelValue', { required: true })
@@ -115,7 +131,13 @@ const isModified = ref(false)
 const originalProfile = ref('')
 
 const initProfile = async () => {
-  if (!props.profileUuid) return
+  if (props.isPreviewMode) {
+    // 在预览模式下加载运行时配置
+    profileContent.value = await getRuntimeProfileContentAPI()
+    originalProfile.value = profileContent.value
+    isModified.value = false
+    return
+  }
 
   const targetProfile = profileList.value.find((p) => p.uuid === props.profileUuid) as Profile
 
@@ -154,9 +176,9 @@ const handleProfileSave = async () => {
 }
 
 watch(
-  () => props.profileUuid,
-  async (val, oldVal) => {
-    if (val !== oldVal && val !== '') {
+  () => isVisible.value,
+  async (val) => {
+    if (val) {
       await initProfile()
     }
   },

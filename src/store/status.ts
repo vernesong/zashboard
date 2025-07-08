@@ -8,9 +8,9 @@ import {
 } from '@/shared/event'
 import { ref, watch } from 'vue'
 import { fetchVersionAPI, version } from '../api'
-import { getClashAPIConfigAPI } from '../api/ipc-invoke'
 import { ROUTE_NAME } from '../constant'
 import router from '../router'
+import { activeProfileUuid } from './profiles'
 import { addBackend, backendList } from './setup'
 
 export const isCoreRunning = ref(false)
@@ -49,13 +49,12 @@ export const resetCoreLogs = () => {
 addMessageListener<boolean>(IS_CORE_RUNNING, async (isRunning) => {
   backendList.value = []
   if (isRunning) {
-    const endpoint = await getClashAPIConfigAPI()
     addBackend({
       host: '127.0.0.1',
       port: '9999',
       protocol: 'http',
       secondaryPath: '',
-      password: endpoint.secret,
+      password: activeProfileUuid.value,
     })
   } else {
     router.push({ name: ROUTE_NAME.profiles })

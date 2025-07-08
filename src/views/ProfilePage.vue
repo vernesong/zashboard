@@ -3,12 +3,21 @@
     <div class="card h-full">
       <div class="card-title justify-between px-4 pt-4">
         {{ $t('profiles') }}
-        <button
-          class="btn btn-sm"
-          @click="showImportModal = true"
-        >
-          {{ $t('addProfile') }}
-        </button>
+        <div class="flex items-center gap-2">
+          <button
+            v-if="isCoreRunning"
+            class="btn btn-sm"
+            @click="previewRuntimeConfig"
+          >
+            {{ $t('runtimeConfig') }}
+          </button>
+          <button
+            class="btn btn-sm"
+            @click="showImportModal = true"
+          >
+            {{ $t('addProfile') }}
+          </button>
+        </div>
       </div>
       <div class="card-body">
         <div class="divider my-0"></div>
@@ -66,6 +75,7 @@
       <ProfileEditor
         v-model="showEditor"
         :profile-uuid="editingProfileUuid"
+        :is-preview-mode="isPreviewMode"
       />
     </Transition>
 
@@ -94,15 +104,23 @@ import type { Profile } from '@/shared/type'
 import { ArrowPathIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import { fromNow } from '../helper/utils'
+import { isCoreRunning } from '../store/status'
 
 const showImportModal = ref(false)
 const editingProfileUuid = ref('')
 const showEditor = ref(false)
 const showDeleteConfirmModal = ref(false)
 const profileToDelete = ref<Profile | null>(null)
+const isPreviewMode = ref(false)
 
 const editProfile = (profileUuid: string) => {
   editingProfileUuid.value = profileUuid
+  isPreviewMode.value = false
+  showEditor.value = true
+}
+
+const previewRuntimeConfig = () => {
+  isPreviewMode.value = true
   showEditor.value = true
 }
 

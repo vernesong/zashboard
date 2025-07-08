@@ -4,7 +4,6 @@ import {
   DISABLE_AUTO_LAUNCH,
   ENABLE_AUTO_LAUNCH,
   GET_ACTIVE_PROFILE,
-  GET_CLASH_API_ENDPOINT,
   GET_PROFILE_CONTENT,
   GET_RUNTIME_PROFILE_CONTENT,
   INSTALL_BINARY,
@@ -38,16 +37,6 @@ export const enableAutoLaunchAPI = async (): Promise<void> => {
 }
 export const disableAutoLaunchAPI = async (): Promise<void> => {
   return await api.invoke(DISABLE_AUTO_LAUNCH)
-}
-
-export const getClashAPIConfigAPI = async (): Promise<{
-  access_control_allow_private_network: boolean
-  external_controller: string
-  external_ui: string
-  external_ui_download_url: string
-  secret: string
-}> => {
-  return await api.invoke(GET_CLASH_API_ENDPOINT)
 }
 
 export const getActiveProfileUuidAPI = async (): Promise<string> => {

@@ -14,7 +14,6 @@ const proxyGroupsForTray = computed(() => {
   }))
 })
 
-console.log('proxyGroupsForTray', proxyGroupsForTray.value)
 watch(
   proxyGroupsForTray,
   (newVal) => {

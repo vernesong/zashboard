@@ -276,6 +276,7 @@ const en = {
   deleteProfile: 'Delete Profile',
   deleteProfileConfirm:
     'Are you sure you want to delete profile "{name}"? This action cannot be undone.',
+  runtimeConfig: 'Runtime Configuration',
   clearRuntimeDir: 'Clear Runtime Directory',
 }
 

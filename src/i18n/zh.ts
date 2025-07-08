@@ -273,6 +273,7 @@ const zh: LANG_MESSAGE = {
   delete: '删除',
   deleteProfile: '删除配置',
   deleteProfileConfirm: '确定要删除配置 "{name}" 吗？此操作不可撤销。',
+  runtimeConfig: '运行时配置',
   clearRuntimeDir: '清空运行时目录',
 }
 
