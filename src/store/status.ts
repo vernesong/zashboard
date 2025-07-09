@@ -1,10 +1,10 @@
-import { addMessageListener } from '@/renderer/src/api/ipc-message'
 import {
   CORE_START_LOG,
   IS_AUTO_LAUNCH_ENABLED,
   IS_CORE_RUNNING,
   IS_SYSTEM_PROXY_ENABLED,
 } from '@/shared/event'
+import { addMessageListener } from '@renderer/api/ipc-message'
 import { ref, watch } from 'vue'
 import { ROUTE_NAME } from '../constant'
 import router from '../router'

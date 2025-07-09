@@ -91,15 +91,15 @@
 </template>
 
 <script setup lang="ts">
-import DeleteProfileModal from '@/renderer/src/components/profile/DeleteProfileModal.vue'
-import ProfileEditor from '@/renderer/src/components/profile/ProfileEditor.vue'
-import ProfileImportModal from '@/renderer/src/components/profile/ProfileImportModal.vue'
+import DeleteProfileModal from '@renderer/components/profile/DeleteProfileModal.vue'
+import ProfileEditor from '@renderer/components/profile/ProfileEditor.vue'
+import ProfileImportModal from '@renderer/components/profile/ProfileImportModal.vue'
 import {
   deleteProfile,
   profileList,
   setActiveProfile,
   updateRemoteProfile,
-} from '@/renderer/src/store/profiles'
+} from '@renderer/store/profiles'
 import type { Profile } from '@/shared/type'
 import { ArrowPathIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'

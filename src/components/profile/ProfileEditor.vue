@@ -21,6 +21,17 @@
             ({{ $t('unsaved') }})
           </span>
         </template>
+        <!-- JSON一级节点按钮 -->
+        <div class="flex max-w-128 items-center gap-1">
+          <button
+            v-for="node in jsonTopLevelNodes"
+            :key="node"
+            class="btn btn-xs btn-outline"
+            @click="scrollToNode(node)"
+          >
+            {{ node }}
+          </button>
+        </div>
       </div>
       <div class="flex items-center gap-2">
         <template v-if="!props.isPreviewMode">
@@ -46,21 +57,17 @@
       </div>
     </div>
 
-    <VueMonacoEditor
-      v-model:value="profileContent"
-      :theme="isDarkTheme ? 'vs-dark' : 'vs'"
-      language="json"
-      :options="{
-        readOnly: props.isPreviewMode,
-        minimap: { enabled: !props.isPreviewMode },
-      }"
-      @change="handleProfileChange"
-    />
+    <!-- Monaco Editor容器 -->
+    <div
+      ref="editorContainerRef"
+      class="min-h-0 flex-1"
+    ></div>
+
     <div
       v-if="profile.type === 'remote' && !props.isPreviewMode"
       class="flex items-center justify-end gap-2 text-sm"
     >
-      <span> url </span>
+      <span> URL </span>
       <input
         v-model="profile.url"
         class="input input-sm w-108"
@@ -92,10 +99,10 @@
 
 <script setup lang="ts">
 import { Profile } from '@/shared/type'
-import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { useNotification } from '@renderer/composables/notification'
 import { isDarkTheme } from '@renderer/helper/utils'
-import { ref, watch } from 'vue'
+import * as monaco from 'monaco-editor'
+import { nextTick, onUnmounted, ref, watch } from 'vue'
 import {
   getProfileContentAPI,
   getRuntimeProfileContentAPI,
@@ -129,6 +136,82 @@ const profile = ref<Profile>({
 const profileContent = ref('')
 const isModified = ref(false)
 const originalProfile = ref('')
+const editorContainerRef = ref<HTMLElement>()
+const jsonTopLevelNodes = ref<string[]>([])
+let editor: monaco.editor.IStandaloneCodeEditor | null = null
+
+// 解析JSON一级节点
+const parseJsonTopLevelNodes = (jsonContent: string) => {
+  try {
+    const parsed = JSON.parse(jsonContent)
+    if (typeof parsed === 'object' && parsed !== null) {
+      jsonTopLevelNodes.value = Object.keys(parsed)
+    } else {
+      jsonTopLevelNodes.value = []
+    }
+  } catch {
+    jsonTopLevelNodes.value = []
+  }
+}
+
+// 跳转到指定节点
+const scrollToNode = (nodeName: string) => {
+  if (!editor) return
+
+  try {
+    const model = editor.getModel()
+    if (!model) return
+
+    // 查找节点位置
+    const searchText = `"${nodeName}":`
+    const findMatch = model.findMatches(searchText, false, false, true, null, false)
+
+    if (findMatch.length > 0) {
+      const position = findMatch[0].range.getStartPosition()
+      editor.revealLineInCenter(position.lineNumber)
+      editor.setPosition(position)
+      editor.focus()
+    }
+  } catch (error) {
+    console.error('跳转到节点失败:', error)
+  }
+}
+
+// 初始化Monaco Editor
+const initEditor = async () => {
+  if (!editorContainerRef.value) return
+
+  // 销毁现有编辑器
+  if (editor) {
+    editor.dispose()
+    editor = null
+  }
+
+  // 创建新编辑器
+  editor = monaco.editor.create(editorContainerRef.value, {
+    value: profileContent.value,
+    language: 'json',
+    theme: isDarkTheme.value ? 'vs-dark' : 'vs',
+    readOnly: props.isPreviewMode,
+    automaticLayout: true,
+    minimap: {
+      enabled: true,
+    },
+    scrollBeyondLastLine: false,
+    fontSize: 14,
+    tabSize: 2,
+    insertSpaces: true,
+    wordWrap: 'on',
+  })
+
+  // 监听内容变化
+  editor.onDidChangeModelContent(() => {
+    if (editor) {
+      profileContent.value = editor.getValue()
+      handleProfileChange()
+    }
+  })
+}
 
 const initProfile = async () => {
   if (props.isPreviewMode) {
@@ -136,6 +219,7 @@ const initProfile = async () => {
     profileContent.value = await getRuntimeProfileContentAPI()
     originalProfile.value = profileContent.value
     isModified.value = false
+    parseJsonTopLevelNodes(profileContent.value)
     return
   }
 
@@ -147,12 +231,15 @@ const initProfile = async () => {
   profileContent.value = await getProfileContentAPI(props.profileUuid)
   originalProfile.value = profileContent.value
   isModified.value = false
+  parseJsonTopLevelNodes(profileContent.value)
 }
 
 const handleProfileChange = () => {
   if (originalProfile.value !== '') {
     isModified.value = profileContent.value !== originalProfile.value
   }
+  // 更新JSON节点列表
+  parseJsonTopLevelNodes(profileContent.value)
 }
 
 const handleProfileReset = () => {
@@ -175,13 +262,40 @@ const handleProfileSave = async () => {
   })
 }
 
+// 监听可见性变化
 watch(
   () => isVisible.value,
   async (val) => {
     if (val) {
       await initProfile()
+      await nextTick()
+      await initEditor()
+    } else {
+      // 隐藏时销毁编辑器
+      if (editor) {
+        editor.dispose()
+        editor = null
+      }
     }
   },
   { immediate: true },
 )
+
+// 监听主题变化
+watch(
+  () => isDarkTheme.value,
+  (isDark) => {
+    if (editor) {
+      monaco.editor.setTheme(isDark ? 'vs-dark' : 'vs')
+    }
+  },
+)
+
+// 组件卸载时清理编辑器
+onUnmounted(() => {
+  if (editor) {
+    editor.dispose()
+    editor = null
+  }
+})
 </script>

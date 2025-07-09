@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import DialogWrapper from '@/renderer/src/components/common/DialogWrapper.vue'
+import DialogWrapper from '@renderer/components/common/DialogWrapper.vue'
 import type { Profile } from '@/shared/type'
 import { computed } from 'vue'
 

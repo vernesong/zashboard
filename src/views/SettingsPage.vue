@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import PantheonSettings from '@/renderer/src/components/settings/PantheonSettings.vue'
+import PantheonSettings from '@renderer/components/settings/PantheonSettings.vue'
 import BackendSettings from '@renderer/components/settings/BackendSettings.vue'
 import ConnectionsSettings from '@renderer/components/settings/ConnectionsSettings.vue'
 import GeneralSettings from '@renderer/components/settings/GeneralSettings.vue'

@@ -1,5 +1,5 @@
-import { isCoreRunning } from '@/renderer/src/store/status'
-import ProfilePage from '@/renderer/src/views/ProfilePage.vue'
+import { isCoreRunning } from '@renderer/store/status'
+import ProfilePage from '@renderer/views/ProfilePage.vue'
 import { ROUTE_NAME } from '@renderer/constant'
 import { renderRoutes } from '@renderer/helper'
 import { i18n } from '@renderer/i18n'

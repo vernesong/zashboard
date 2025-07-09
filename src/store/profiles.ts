@@ -4,8 +4,8 @@ import {
   setActiveProfileAPI,
   updateProfileAPI,
   updateRemoteProfileAPI,
-} from '@/renderer/src/api/ipc-invoke'
-import { addMessageListener } from '@/renderer/src/api/ipc-message'
+} from '@renderer/api/ipc-invoke'
+import { addMessageListener } from '@renderer/api/ipc-message'
 import { PROFILE_LIST_UPDATED } from '@/shared/event'
 import { Profile } from '@/shared/type'
 import { computed, ref } from 'vue'

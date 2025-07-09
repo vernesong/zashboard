@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { saveProfile } from '@/renderer/src/store/profiles'
+import { saveProfile } from '@renderer/store/profiles'
 import { computed, ref } from 'vue'
 import DialogWrapper from '../common/DialogWrapper.vue'
 
