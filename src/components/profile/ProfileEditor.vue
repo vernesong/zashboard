@@ -260,6 +260,8 @@ const handleProfileSave = async () => {
     type: 'alert-success',
     timeout: 2000,
   })
+  isModified.value = false
+  isVisible.value = false
 }
 
 // 监听可见性变化

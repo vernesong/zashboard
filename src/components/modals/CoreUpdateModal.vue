@@ -48,6 +48,8 @@ const isUpdating = ref(false)
 
 const { showNotification } = useNotification()
 const handleCoreUpdateSuccess = (message: string) => {
+  isOpen.value = false
+  isUpdating.value = false
   showNotification({
     message: message,
     type: 'alert-success',
@@ -55,6 +57,8 @@ const handleCoreUpdateSuccess = (message: string) => {
 }
 
 const handleCoreUpdateError = (error: string) => {
+  isOpen.value = false
+  isUpdating.value = false
   showNotification({
     message: error,
     type: 'alert-error',
@@ -67,7 +71,6 @@ const handleOfficialUpdate = async () => {
   isUpdating.value = true
   try {
     const result = await updateCoreFromOfficialAPI()
-    isOpen.value = false
     handleCoreUpdateSuccess(result)
   } catch (error) {
     handleCoreUpdateError(error instanceof Error ? error.message : String(error))
@@ -84,7 +87,6 @@ const handleFileUpload = async () => {
     if (filePath) {
       isUpdating.value = true
       const result = await updateCoreFromFileAPI(filePath)
-      isOpen.value = false
       handleCoreUpdateSuccess(result)
     }
   } catch (error) {
