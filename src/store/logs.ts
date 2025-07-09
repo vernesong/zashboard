@@ -45,10 +45,14 @@ watch(
   },
 )
 
-export const initLogs = () => {
+export const resetLogs = () => {
   cancel?.()
   logs.value = []
   logsTemp = []
+}
+
+export const initLogs = () => {
+  resetLogs()
 
   let idx = 1
   const ws = fetchLogsAPI<Log>({

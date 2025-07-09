@@ -105,6 +105,9 @@ import type { Backend } from '@renderer/types'
 import { useDocumentVisibility, useElementSize } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
+import { resetConnections } from '../store/connections'
+import { resetLogs } from '../store/logs'
+import { resetStatistic } from '../store/overview'
 import { isCoreRunning } from '../store/status'
 
 const ctrlsMap: Record<string, Component> = {
@@ -131,7 +134,12 @@ const isLargeCtrlsBar = computed(() => {
 watch(
   isCoreRunning,
   () => {
-    if (!isCoreRunning.value) return
+    if (!isCoreRunning.value) {
+      resetStatistic()
+      resetConnections()
+      resetLogs()
+      return
+    }
     rulesTabShow.value = RULE_TAB_TYPE.RULES
     proxiesTabShow.value = PROXY_TAB_TYPE.PROXIES
     fetchConfigs()
