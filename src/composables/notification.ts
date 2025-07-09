@@ -10,12 +10,14 @@ let timmer
 
 export const useNotification = () => {
   const showNotification = ({
-    content,
+    content = '',
+    message,
     params = {},
     type = 'alert-warning',
     timeout = 5000,
   }: {
-    content: string
+    content?: string
+    message?: string
     params?: Record<string, string>
     type?: 'alert-warning' | 'alert-success' | 'alert-error' | 'alert-info' | ''
     timeout?: number
@@ -23,7 +25,7 @@ export const useNotification = () => {
     clearTimeout(timmer)
     tipType.value = type
     tipShowModel.value = true
-    tipContent.value = t(content, params)
+    tipContent.value = message || t(content, params)
 
     if (timeout === 0) {
       return

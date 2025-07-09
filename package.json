@@ -16,8 +16,7 @@
     "format": "prettier --write src/",
     "lint": "eslint . --fix",
     "prepare": "husky",
-    "preview": "vite preview",
-    "type-check": "echo 1"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@eslint/plugin-kit": "^0.3.4",

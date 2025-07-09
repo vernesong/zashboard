@@ -253,12 +253,7 @@ const zh: LANG_MESSAGE = {
   subscriptionURL: '订阅地址',
   coreStatus: '核心状态',
   autoLaunch: '自动启动',
-  installBinary: '安装二进制',
-  uninstallBinary: '卸载二进制',
   saveSuccess: '保存成功',
-  binaryInstallRequired: '需要安装二进制',
-  binaryInstallDescription:
-    '为了确保应用正常运行，我们需要安装必要的二进制文件。请点击下方按钮继续安装。',
   installNow: '立即安装',
   addProfile: '新增配置',
   editProfile: '编辑配置',
@@ -275,6 +270,10 @@ const zh: LANG_MESSAGE = {
   deleteProfileConfirm: '确定要删除配置 "{name}" 吗？此操作不可撤销。',
   runtimeConfig: '运行时配置',
   clearRuntimeDir: '清空运行时目录',
+  updateCore: '更新内核',
+  updateCoreDescription: '选择如何更新内核二进制文件。您可以从官方仓库下载或手动上传文件。',
+  updateFromOfficial: '从官方更新',
+  updateFromFile: '从文件更新',
 }
 
 export default zh

@@ -157,6 +157,12 @@
         </button>
         <button
           class="btn btn-sm"
+          @click="showCoreUpdateModal = true"
+        >
+          {{ $t('updateCore') }}
+        </button>
+        <button
+          class="btn btn-sm"
           @click="exportSettings"
         >
           {{ $t('exportSettings') }}
@@ -165,6 +171,9 @@
       </div>
     </div>
   </div>
+
+  <!-- 内核更新弹窗 -->
+  <CoreUpdateModal v-model="showCoreUpdateModal" />
 </template>
 
 <script setup lang="ts">
@@ -201,12 +210,14 @@ import { isAutoLaunchEnabled } from '@renderer/store/status'
 import { computed, ref, watch } from 'vue'
 import ImportSettings from '../common/ImportSettings.vue'
 import TextInput from '../common/TextInput.vue'
+import CoreUpdateModal from '../modals/CoreUpdateModal.vue'
 import CustomTheme from './CustomTheme.vue'
 import ThemeSelector from './ThemeSelector.vue'
 
 const customThemeModal = ref(false)
 const displayBgProperty = ref(false)
 const appVersion = __APP_VERSION__
+const showCoreUpdateModal = ref(false)
 
 watch(customBackgroundURL, (value) => {
   if (value) {

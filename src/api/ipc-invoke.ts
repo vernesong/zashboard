@@ -6,8 +6,7 @@ import {
   GET_ACTIVE_PROFILE,
   GET_PROFILE_CONTENT,
   GET_RUNTIME_PROFILE_CONTENT,
-  INSTALL_BINARY,
-  IS_BINARY_INSTALLED,
+  SELECT_CORE_FILE,
   SET_ACTIVE_PROFILE,
   SET_PROFILE,
   SET_PROFILE_CONTENT,
@@ -15,8 +14,9 @@ import {
   START_CORE,
   STOP_CORE,
   TRAY_STORE_UPDATED,
-  UNINSTALL_BINARY,
   UNSET_SYSTEM_PROXY,
+  UPDATE_CORE_FROM_FILE,
+  UPDATE_CORE_FROM_OFFICIAL,
   UPDATE_PROFILE,
   UPDATE_REMOTE_PROFILE,
   UPDATE_SETTINGS,
@@ -82,17 +82,6 @@ export const unsetSystemProxyAPI = async (): Promise<void> => {
   return await api.invoke(UNSET_SYSTEM_PROXY)
 }
 
-// 二进制安装相关API
-export const isBinaryInstalledAPI = async (): Promise<boolean> => {
-  return await api.invoke(IS_BINARY_INSTALLED)
-}
-export const installBinaryAPI = async (): Promise<string> => {
-  return await api.invoke(INSTALL_BINARY)
-}
-export const uninstallBinaryAPI = async (): Promise<string> => {
-  return await api.invoke(UNINSTALL_BINARY)
-}
-
 // 设置相关API
 export const updateSettingsAPI = async (key: string, value: string): Promise<void> => {
   return await api.invoke(UPDATE_SETTINGS, { key, value })
@@ -104,4 +93,17 @@ export const clearRuntimeDirAPI = async (): Promise<void> => {
 
 export const updateTrayStoreAPI = async (key: string, value: unknown): Promise<void> => {
   return await api.invoke(TRAY_STORE_UPDATED, { key, value: JSON.stringify(value) })
+}
+
+// 内核更新相关API
+export const updateCoreFromOfficialAPI = async (): Promise<string> => {
+  return await api.invoke(UPDATE_CORE_FROM_OFFICIAL)
+}
+
+export const updateCoreFromFileAPI = async (filePath: string): Promise<string> => {
+  return await api.invoke(UPDATE_CORE_FROM_FILE, filePath)
+}
+
+export const selectCoreFileAPI = async (): Promise<string | null> => {
+  return await api.invoke(SELECT_CORE_FILE)
 }

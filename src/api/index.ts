@@ -14,6 +14,8 @@ import axios, { AxiosError } from 'axios'
 import { debounce } from 'lodash-es'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
 import { computed, nextTick, ref } from 'vue'
+import { CORE_VERSION } from '../../../shared/event'
+import { addMessageListener } from './ipc-message'
 
 axios.interceptors.request.use((config) => {
   config.baseURL = getUrlFromBackend(activeBackend.value!)
@@ -52,9 +54,11 @@ axios.interceptors.response.use(
 
 export const version = ref()
 export const isCoreUpdateAvailable = ref(false)
-export const fetchVersionAPI = () => {
-  return axios.get<{ version: string }>('/version')
-}
+
+addMessageListener(CORE_VERSION, (value: string) => {
+  version.value = value
+})
+
 export const isSingBox = computed(() => true)
 export const zashboardVersion = ref(__APP_VERSION__)
 

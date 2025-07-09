@@ -255,12 +255,7 @@ const en = {
   subscriptionURL: 'Subscription URL',
   coreStatus: 'Core Status',
   autoLaunch: 'Auto Launch',
-  installBinary: 'Install Binary',
-  uninstallBinary: 'Uninstall Binary',
   saveSuccess: 'Save Success',
-  binaryInstallRequired: 'Binary Installation Required',
-  binaryInstallDescription:
-    'To ensure the application runs properly, we need to install necessary binary files. Please click the button below to continue with the installation.',
   installNow: 'Install Now',
   addProfile: 'Add Profile',
   editProfile: 'Edit Profile',
@@ -278,6 +273,11 @@ const en = {
     'Are you sure you want to delete profile "{name}"? This action cannot be undone.',
   runtimeConfig: 'Runtime Configuration',
   clearRuntimeDir: 'Clear Runtime Directory',
+  updateCore: 'Update Core',
+  updateCoreDescription:
+    'Choose how you want to update the core binary. You can download from the official repository or upload a file manually.',
+  updateFromOfficial: 'Update from Official',
+  updateFromFile: 'Update from File',
 }
 
 export type LANG_MESSAGE = typeof en

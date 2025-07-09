@@ -256,12 +256,7 @@ const ru: LANG_MESSAGE = {
   subscriptionURL: 'URL подписки',
   coreStatus: 'Статус ядра',
   autoLaunch: 'Автозапуск',
-  installBinary: 'Установить бинарный файл',
-  uninstallBinary: 'Удалить бинарный файл',
   saveSuccess: 'Сохранено успешно',
-  binaryInstallRequired: 'Требуется установка бинарного файла',
-  binaryInstallDescription:
-    'Для обеспечения корректной работы приложения необходимо установить бинарные файлы. Пожалуйста, нажмите кнопку ниже для продолжения установки.',
   installNow: 'Установить сейчас',
   addProfile: 'Добавить профиль',
   editProfile: 'Редактировать профиль',
@@ -277,6 +272,12 @@ const ru: LANG_MESSAGE = {
   delete: 'Удалить',
   autoUpdate: 'Автоматическое обновление',
   clearRuntimeDir: 'Очистить каталог времени выполнения',
+  updateCore: 'Обновить ядро',
+  updateCoreDescription:
+    'Выберите, как обновить бинарный файл ядра. Вы можете скачать его из официального репозитория или загрузить файл вручную.',
+  updateFromOfficial: 'Обновить из официального',
+  updateFromFile: 'Обновить из файла',
+  runtimeConfig: 'Конфигурация времени выполнения',
 }
 
 export default ru
