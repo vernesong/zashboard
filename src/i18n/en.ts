@@ -255,6 +255,7 @@ const en = {
   subscriptionURL: 'Subscription URL',
   coreStatus: 'Core Status',
   autoLaunch: 'Auto Launch',
+  autoSystemProxy: 'Auto System Proxy',
   saveSuccess: 'Save Success',
   installNow: 'Install Now',
   addProfile: 'Add Profile',
