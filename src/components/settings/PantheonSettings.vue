@@ -1,5 +1,4 @@
 <template>
-  <!-- dashboard -->
   <div class="card">
     <div class="card-title px-4 pt-4">
       <a
@@ -180,7 +179,6 @@
     </div>
   </div>
 
-  <!-- 内核更新弹窗 -->
   <CoreUpdateModal v-model="showCoreUpdateModal" />
 </template>
 
@@ -271,8 +269,6 @@ const refreshPages = async () => {
 const handlerClickClearRuntimeDir = async () => {
   try {
     await clearRuntimeDirAPI()
-    // 可以添加成功提示
-    console.log('Runtime directory cleared successfully')
   } catch (error) {
     console.error('Failed to clear runtime directory:', error)
   }

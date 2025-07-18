@@ -4,10 +4,10 @@
       <div class="flex items-center gap-2">
         {{ $t('coreStatus') }}
         <input
-          v-model="isCoreRunning"
+          v-model="isCoreRunningLocal"
           type="checkbox"
           class="toggle"
-          @click="toggleCoreRunning"
+          @click.stop="toggleCoreRunning"
         />
         <span
           v-if="isCoreRunning"
@@ -31,10 +31,10 @@
       <div class="flex items-center gap-2">
         {{ $t('systemProxy') }}
         <input
-          v-model="isSystemProxyEnabled"
+          v-model="isSystemProxyEnabledLocal"
           type="checkbox"
           class="toggle"
-          @click="toggleSystemProxy"
+          @click.stop="toggleSystemProxy"
         />
         <span
           v-if="isSystemProxyEnabled"
@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import {
   setSystemProxyAPI,
   startCoreAPI,
@@ -75,6 +75,17 @@ import {
 } from '../../store/status'
 import CoreStartupModal from '../modals/CoreStartupModal.vue'
 
+const isCoreRunningLocal = ref(isCoreRunning.value)
+const isSystemProxyEnabledLocal = ref(isSystemProxyEnabled.value)
+
+watch(isCoreRunning, (newVal) => {
+  isCoreRunningLocal.value = newVal
+})
+
+watch(isSystemProxyEnabled, (newVal) => {
+  isSystemProxyEnabledLocal.value = newVal
+})
+
 watch(
   coreLogs,
   (newVal) => {
@@ -85,9 +96,7 @@ watch(
   { deep: true },
 )
 
-const toggleCoreRunning = async (e: Event) => {
-  e.preventDefault()
-  e.stopPropagation()
+const toggleCoreRunning = async () => {
   if (!isCoreRunning.value) {
     showCoreStartupModal.value = true
     await startCoreAPI()
@@ -96,9 +105,7 @@ const toggleCoreRunning = async (e: Event) => {
   }
 }
 
-const toggleSystemProxy = async (e: Event) => {
-  e.preventDefault()
-  e.stopPropagation()
+const toggleSystemProxy = async () => {
   if (!isSystemProxyEnabled.value) {
     await setSystemProxyAPI()
   } else {

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isVisible"
-    class="bg-base-100 fixed top-0 left-0 z-50 flex h-full w-full flex-col gap-2 overflow-hidden p-4"
+    class="bg-base-100 profile-editor fixed top-0 left-0 z-50 flex h-full w-full flex-col gap-2 overflow-hidden p-4"
     @keydown.ctrl.s.prevent="handleProfileSave"
   >
     <div class="flex items-center justify-between">

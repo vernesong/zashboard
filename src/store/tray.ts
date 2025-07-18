@@ -17,7 +17,6 @@ const proxyGroupsForTray = computed(() => {
 watch(
   proxyGroupsForTray,
   (newVal) => {
-    console.log('proxyGroupsForTray', newVal)
     updateTrayStoreAPI('proxyGroups', unref(newVal))
   },
   {

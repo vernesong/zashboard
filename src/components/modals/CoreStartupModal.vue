@@ -103,9 +103,6 @@ const getLogClass = (log: string) => {
   if (lowerLog.includes(LOG_LEVEL.Warning)) {
     return 'text-warning'
   }
-  if (lowerLog.includes(LOG_LEVEL.Debug)) {
-    return 'text-accent'
-  }
   if (lowerLog.includes('clash-api: restful api listening at')) {
     return 'text-success font-bold'
   }
