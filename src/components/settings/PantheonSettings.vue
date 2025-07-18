@@ -7,14 +7,6 @@
       >
         <span> Pantheon v{{ appVersion }} </span>
       </a>
-      <button
-        v-if="isPWA"
-        class="btn btn-sm absolute top-2 right-2"
-        @click="refreshPages"
-      >
-        {{ $t('refresh') }}
-        <ArrowPathIcon class="h-4 w-4" />
-      </button>
     </div>
     <div class="card-body gap-4">
       <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
@@ -183,12 +175,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  AdjustmentsHorizontalIcon,
-  ArrowPathIcon,
-  ArrowUpTrayIcon,
-  PlusIcon,
-} from '@heroicons/vue/24/outline'
+import { AdjustmentsHorizontalIcon, ArrowUpTrayIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import {
   clearRuntimeDirAPI,
   disableAutoLaunchAPI,
@@ -201,7 +188,7 @@ import {
   LOCAL_IMAGE,
   saveBase64ToIndexedDB,
 } from '@renderer/helper/indexeddb'
-import { exportSettings, isPWA } from '@renderer/helper/utils'
+import { exportSettings } from '@renderer/helper/utils'
 import {
   autoSystemProxy,
   autoTheme,
@@ -256,15 +243,6 @@ const handlerFileChange = (e: Event) => {
 const fontOptions = computed(() => {
   return Object.values(FONTS)
 })
-
-const refreshPages = async () => {
-  const registrations = await navigator.serviceWorker.getRegistrations()
-
-  for (const registration of registrations) {
-    registration.unregister()
-  }
-  window.location.reload()
-}
 
 const handlerClickClearRuntimeDir = async () => {
   try {

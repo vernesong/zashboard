@@ -113,7 +113,6 @@ const handlerJsonUpload = () => {
     for (const key in settings) {
       localStorage.setItem(key, settings[key])
     }
-    location.reload()
   }
   reader.readAsText(file)
 }
