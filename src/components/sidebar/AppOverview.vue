@@ -54,8 +54,10 @@
       </div>
     </div>
 
-    <!-- 核心启动日志模态框 -->
-    <CoreStartupModal v-model="showCoreStartupModal" />
+    <CoreStartupModal
+      v-model="showCoreStartupModal"
+      @stopCore="stopCore"
+    />
   </div>
 </template>
 
@@ -97,7 +99,7 @@ watch(
 )
 
 const toggleCoreRunning = async () => {
-  if (!isCoreRunning.value) {
+  if (!isCoreRunningLocal.value) {
     showCoreStartupModal.value = true
     await startCoreAPI()
   } else {
@@ -106,10 +108,14 @@ const toggleCoreRunning = async () => {
 }
 
 const toggleSystemProxy = async () => {
-  if (!isSystemProxyEnabled.value) {
+  if (!isSystemProxyEnabledLocal.value) {
     await setSystemProxyAPI()
   } else {
     await unsetSystemProxyAPI()
   }
+}
+
+const stopCore = () => {
+  isCoreRunningLocal.value = false
 }
 </script>

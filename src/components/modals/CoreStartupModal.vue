@@ -5,7 +5,6 @@
     no-close-button
   >
     <div class="flex max-h-[80vh] flex-col">
-      <!-- 标题栏 -->
       <div class="border-base-300 flex items-center justify-between border-b p-4">
         <h3 class="text-lg font-semibold">{{ $t('coreStartupLogs') }}</h3>
         <div class="flex items-center gap-2">
@@ -23,7 +22,6 @@
         </div>
       </div>
 
-      <!-- 日志内容 -->
       <div class="flex-1 overflow-y-auto p-4">
         <div
           v-if="coreLogs.length === 0"
@@ -46,7 +44,6 @@
         </div>
       </div>
 
-      <!-- 底部操作栏 -->
       <div class="border-base-300 flex items-center justify-between border-t p-4">
         <div class="text-base-content/70 text-sm">
           {{ $t('logCount', { count: coreLogs.length }) }}
@@ -74,11 +71,10 @@ import DialogWrapper from '../common/DialogWrapper.vue'
 
 const isVisible = defineModel<boolean>()
 const { t } = useI18n()
+const emit = defineEmits(['stopCore'])
 
-// 当核心启动成功后自动关闭模态框
 watch(isCoreRunning, (isRunning) => {
   if (isRunning && isVisible.value) {
-    // 延迟一点时间让用户看到启动成功的日志
     setTimeout(() => {
       isVisible.value = false
     }, 1000)
@@ -88,9 +84,9 @@ watch(isCoreRunning, (isRunning) => {
 const closeModal = () => {
   stopCoreAPI()
   isVisible.value = false
+  emit('stopCore')
 }
 
-// 根据日志内容判断样式
 const getLogClass = (log: string) => {
   const lowerLog = log.toLowerCase()
   if (
@@ -109,7 +105,6 @@ const getLogClass = (log: string) => {
   return 'text-base-content'
 }
 
-// 计算属性
 const hasFatalOrPanicLogs = computed(() => {
   return coreLogs.value.some(
     (log) =>
