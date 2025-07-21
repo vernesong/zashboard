@@ -57,7 +57,6 @@
       </div>
     </div>
 
-    <!-- Monaco Editor容器 -->
     <div
       ref="editorContainerRef"
       class="min-h-0 flex-1"
@@ -102,13 +101,25 @@ import { Profile } from '@/shared/type'
 import { useNotification } from '@renderer/composables/notification'
 import { isDarkTheme } from '@renderer/helper/utils'
 import * as monaco from 'monaco-editor'
+// @ts-expect-error - Monaco Editor worker import with query parameter
+import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import { nextTick, onUnmounted, ref, watch } from 'vue'
 import {
+  checkProfileContentAPI,
   getProfileContentAPI,
   getRuntimeProfileContentAPI,
   writeProfileContentAPI,
 } from '../../api/ipc-invoke'
 import { profileList, updateProfile } from '../../store/profiles'
+
+window.MonacoEnvironment = {
+  getWorker(_, label) {
+    if (label === 'json') {
+      return new jsonWorker()
+    }
+    return new jsonWorker()
+  },
+}
 
 interface Props {
   profileUuid?: string
@@ -140,7 +151,6 @@ const editorContainerRef = ref<HTMLElement>()
 const jsonTopLevelNodes = ref<string[]>([])
 let editor: monaco.editor.IStandaloneCodeEditor | null = null
 
-// 解析JSON一级节点
 const parseJsonTopLevelNodes = (jsonContent: string) => {
   try {
     const parsed = JSON.parse(jsonContent)
@@ -154,7 +164,6 @@ const parseJsonTopLevelNodes = (jsonContent: string) => {
   }
 }
 
-// 跳转到指定节点
 const scrollToNode = (nodeName: string) => {
   if (!editor) return
 
@@ -162,7 +171,6 @@ const scrollToNode = (nodeName: string) => {
     const model = editor.getModel()
     if (!model) return
 
-    // 查找节点位置
     const searchText = `"${nodeName}":`
     const findMatch = model.findMatches(searchText, false, false, true, null, false)
 
@@ -177,17 +185,14 @@ const scrollToNode = (nodeName: string) => {
   }
 }
 
-// 初始化Monaco Editor
 const initEditor = async () => {
   if (!editorContainerRef.value) return
 
-  // 销毁现有编辑器
   if (editor) {
     editor.dispose()
     editor = null
   }
 
-  // 创建新编辑器
   editor = monaco.editor.create(editorContainerRef.value, {
     value: profileContent.value,
     language: 'json',
@@ -204,7 +209,6 @@ const initEditor = async () => {
     wordWrap: 'on',
   })
 
-  // 监听内容变化
   editor.onDidChangeModelContent(() => {
     if (editor) {
       profileContent.value = editor.getValue()
@@ -215,7 +219,6 @@ const initEditor = async () => {
 
 const initProfile = async () => {
   if (props.isPreviewMode) {
-    // 在预览模式下加载运行时配置
     profileContent.value = await getRuntimeProfileContentAPI()
     originalProfile.value = profileContent.value
     isModified.value = false
@@ -238,7 +241,6 @@ const handleProfileChange = () => {
   if (originalProfile.value !== '') {
     isModified.value = profileContent.value !== originalProfile.value
   }
-  // 更新JSON节点列表
   parseJsonTopLevelNodes(profileContent.value)
 }
 
@@ -246,8 +248,27 @@ const handleProfileReset = () => {
   initProfile()
 }
 
+const handleProfileCheck = async () => {
+  const result = await checkProfileContentAPI(profileContent.value)
+
+  if (result === 0) {
+    return true
+  } else {
+    showNotification({
+      content: 'checkFailed',
+      params: {
+        error: result.toString(),
+      },
+      type: 'alert-error',
+      timeout: 5000,
+    })
+    return false
+  }
+}
+
 const handleProfileSave = async () => {
   if (!props.profileUuid) return
+  if (!(await handleProfileCheck())) return
 
   profileContent.value = profileContent.value.trim()
   await writeProfileContentAPI(props.profileUuid, profileContent.value)
@@ -264,7 +285,6 @@ const handleProfileSave = async () => {
   isVisible.value = false
 }
 
-// 监听可见性变化
 watch(
   () => isVisible.value,
   async (val) => {
@@ -273,7 +293,6 @@ watch(
       await nextTick()
       await initEditor()
     } else {
-      // 隐藏时销毁编辑器
       if (editor) {
         editor.dispose()
         editor = null
@@ -283,7 +302,6 @@ watch(
   { immediate: true },
 )
 
-// 监听主题变化
 watch(
   () => isDarkTheme.value,
   (isDark) => {
@@ -293,7 +311,6 @@ watch(
   },
 )
 
-// 组件卸载时清理编辑器
 onUnmounted(() => {
   if (editor) {
     editor.dispose()

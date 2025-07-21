@@ -1,4 +1,5 @@
 import {
+  CHECK_PROFILE_CONTENT,
   CLEAR_RUNTIME_DIR,
   DELETE_PROFILE,
   DISABLE_AUTO_LAUNCH,
@@ -58,6 +59,9 @@ export const updateProfileAPI = async (
 }
 export const deleteProfileAPI = async (profileUuid: string): Promise<void> => {
   return await api.invoke(DELETE_PROFILE, profileUuid)
+}
+export const checkProfileContentAPI = async (content: string): Promise<string | number> => {
+  return await api.invoke(CHECK_PROFILE_CONTENT, content)
 }
 
 export const getProfileContentAPI = async (profileUuid: string): Promise<string> => {

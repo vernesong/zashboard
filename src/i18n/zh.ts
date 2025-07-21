@@ -275,6 +275,7 @@ const zh: LANG_MESSAGE = {
   updateCoreDescription: '选择如何更新内核二进制文件。您可以从官方仓库下载或手动上传文件。',
   updateFromOfficial: '从官方更新',
   updateFromFile: '从文件更新',
+  checkFailed: 'JSON格式检查失败，请检查配置文件 {error}',
 }
 
 export default zh

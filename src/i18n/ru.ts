@@ -279,6 +279,8 @@ const ru: LANG_MESSAGE = {
   updateFromOfficial: 'Обновить из официального',
   updateFromFile: 'Обновить из файла',
   runtimeConfig: 'Конфигурация времени выполнения',
+  checkFailed:
+    'Проверка JSON формата не прошла, пожалуйста, проверьте конфигурационный файл {error}',
 }
 
 export default ru

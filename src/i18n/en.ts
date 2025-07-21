@@ -279,6 +279,7 @@ const en = {
     'Choose how you want to update the core binary. You can download from the official repository or upload a file manually.',
   updateFromOfficial: 'Update from Official',
   updateFromFile: 'Update from File',
+  checkFailed: 'JSON format check failed, please check the configuration file {error}',
 }
 
 export type LANG_MESSAGE = typeof en
