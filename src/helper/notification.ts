@@ -24,7 +24,7 @@ const setTimer = (alert: HTMLElement, timeout: number, alertKey?: string) => {
         alertMap.delete(alertKey)
       }
       alert.remove()
-    }, timeout)
+    }, timeout) as unknown as number
   }
 
   if (alertKey) {

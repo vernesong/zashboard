@@ -7,7 +7,7 @@ import 'tippy.js/animations/scale.css'
 import 'tippy.js/dist/tippy.css'
 import { createApp } from 'vue'
 import App from './App.vue'
-import { loadFonts } from './assets/load-fonts'
+import './assets/load-fonts'
 import './assets/main.css'
 import './assets/theme.css'
 import { applyCustomThemes } from './helper'
@@ -18,7 +18,6 @@ import './store/status'
 import './store/tray'
 
 applyCustomThemes()
-loadFonts()
 
 const app = createApp(App)
 
