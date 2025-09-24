@@ -193,6 +193,7 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
+import { blockconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
 import {
   CONNECTION_TAB_TYPE,
@@ -224,6 +225,7 @@ import {
   ArrowDownCircleIcon,
   ArrowRightCircleIcon,
   ArrowUpCircleIcon,
+  NoSymbolIcon,
   MagnifyingGlassMinusIcon,
   MagnifyingGlassPlusIcon,
   MapPinIcon,
@@ -282,7 +284,7 @@ const columns: ColumnDef<Connection>[] = [
     enableSorting: false,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Close,
     cell: ({ row }) => {
-      return h(
+      const closeButton = h(
         'button',
         {
           class: 'btn btn-xs btn-circle',
@@ -299,6 +301,26 @@ const columns: ColumnDef<Connection>[] = [
           }),
         ],
       )
+
+      const degradeButton = row.original.metadata.smartBlock === 'normal' ? h(
+        'button',
+        {
+          class: 'btn btn-xs btn-circle',
+          onClick: (e) => {
+            const connection = row.original
+
+            e.stopPropagation()
+            blockconnectByIdAPI(connection.id)
+          },
+        },
+        [
+          h(NoSymbolIcon, {
+            class: 'h-4 w-4',
+          }),
+        ],
+      ) : null
+
+      return h('div', { class: 'flex gap-1' }, [closeButton, degradeButton].filter(Boolean))
     },
   },
   {
