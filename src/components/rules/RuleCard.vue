@@ -1,11 +1,14 @@
 <template>
-  <div class="card">
+  <div
+    class="card"
+    :class="{ 'opacity-50': isDisabled }"
+  >
     <div
       class="flex flex-col gap-2 overflow-hidden p-2 text-sm"
       :class="{
         'cursor-pointer': isSelectable,
       }"
-      @click="isSelectable && ((isCollapsed = !isCollapsed), (selected = rule.proxy))"
+      @click="clickHandler"
     >
       <div class="min-h-6 leading-6">
         <span>{{ index }}.</span>
@@ -35,10 +38,18 @@
               isUpdating ? 'animate-spin' : '',
             )
           "
-          @click="updateRuleProviderClickHandler"
+          @click.stop="updateRuleProviderClickHandler"
         >
           <ArrowPathIcon class="h-4 w-4" />
         </button>
+        <input
+          v-if="rule.uuid"
+          type="checkbox"
+          class="toggle toggle-xs ml-2"
+          :checked="!isDisabled"
+          @change="toggleRuleDisabledHandler"
+          @click.stop
+        />
       </div>
       <div class="flex min-h-6 flex-wrap items-center gap-2">
         <ProxyName
@@ -94,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { updateRuleProviderAPI } from '@/api'
+import { toggleRuleDisabledAPI, updateRuleProviderAPI } from '@/api'
 import { useBounceOnVisible } from '@/composables/bouncein'
 import { NOT_CONNECTED } from '@/constant'
 import { getColorForLatency } from '@/helper'
@@ -146,6 +157,9 @@ const size = computed(() => {
 })
 
 const isUpdating = ref(false)
+const isTogglingDisabled = ref(false)
+const isDisabled = computed(() => props.rule.disabled)
+
 const isUpdateableRuleSet = computed(() => {
   if (props.rule.type !== 'RuleSet') {
     return false
@@ -164,12 +178,31 @@ const updateRuleProviderClickHandler = async () => {
 
   isUpdating.value = true
   await updateRuleProviderAPI(props.rule.payload)
-  fetchRules()
+  await fetchRules()
   isUpdating.value = false
+}
+
+const toggleRuleDisabledHandler = async () => {
+  if (isTogglingDisabled.value) return
+
+  try {
+    isTogglingDisabled.value = true
+    await toggleRuleDisabledAPI(props.rule.uuid)
+    await fetchRules()
+  } finally {
+    isTogglingDisabled.value = false
+  }
 }
 
 const showMMDBSizeTip = (e: Event) => {
   showTip(e, t('mmdbSizeTip'))
+}
+
+const clickHandler = () => {
+  if (isSelectable.value) {
+    isCollapsed.value = !isCollapsed.value
+    selected.value = props.rule.proxy
+  }
 }
 
 useBounceOnVisible()

@@ -147,6 +147,10 @@ export const fetchRulesAPI = () => {
   return axios.get<{ rules: Rule[] }>('/rules')
 }
 
+export const toggleRuleDisabledAPI = (uuid: string) => {
+  return axios.put(`/rules/${encodeURIComponent(uuid)}`)
+}
+
 export const fetchRuleProvidersAPI = () => {
   return axios.get<{ providers: Record<string, RuleProvider> }>('/providers/rules')
 }

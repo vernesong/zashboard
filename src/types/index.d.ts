@@ -74,6 +74,8 @@ export type Rule = {
   payload: string
   proxy: string
   size: number
+  disabled: boolean
+  uuid: string
 }
 
 export type RuleProvider = {
