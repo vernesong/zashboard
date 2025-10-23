@@ -1,5 +1,4 @@
-import { disconnectByIdAPI } from '@/api'
-import { blockconnectByIdAPI } from '@/api'
+import { blockconnectByIdAPI, disconnectByIdAPI } from '@/api'
 import { useBounceOnVisible } from '@/composables/bouncein'
 import { useConnections } from '@/composables/connections'
 import {
@@ -103,13 +102,13 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.download)}
-            <ArrowDownIcon class="text-success h-4 w-4" />
+            <ArrowDownIcon class="text-success h-3 w-3" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.upload)}
-            <ArrowUpIcon class="text-info h-4 w-4" />
+            <ArrowUpIcon class="text-info h-3 w-3" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: (
@@ -133,8 +132,8 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.InboundUser]: (
           <div class="gap-1 whitespace-nowrap">{getInboundUserFromConnection(conn)}</div>
         ),
-        [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
-          <div class="flex gap-1">
+        [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (() => {
+          const closeButton = (
             <button
               class="btn btn-circle btn-xs"
               onClick={(e) => {
@@ -144,7 +143,10 @@ export default defineComponent<{
             >
               <XMarkIcon class="h-4 w-4" />
             </button>
-            {metadata.smartBlock === 'normal' && (
+          )
+
+          if (metadata.smartBlock === 'normal') {
+            const degradeButton = (
               <button
                 class="btn btn-circle btn-xs"
                 onClick={(e) => {
@@ -154,9 +156,16 @@ export default defineComponent<{
               >
                 <NoSymbolIcon class="h-4 w-4" />
               </button>
-            )}
-          </div>
-        ),
+            )
+            return (
+              <div class="flex gap-1">
+                {degradeButton}
+                {closeButton}
+              </div>
+            )
+          }
+          return closeButton
+        })(),
       }
       return (
         <div

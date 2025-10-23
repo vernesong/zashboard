@@ -17,6 +17,7 @@ const zh: LANG_MESSAGE = {
   upload: '上传',
   downloadSpeed: '下载速度',
   uploadSpeed: '上传速度',
+  speed: '速度',
   memoryUsage: '内存使用',
   version: '版本',
   noContent: '无内容',
@@ -90,6 +91,12 @@ const zh: LANG_MESSAGE = {
   bar: '条',
   exportSettings: '导出设置',
   importSettings: '导入设置',
+  connectionSettings: '连接设置',
+  proxySettings: '代理设置',
+  logSettings: '日志设置',
+  ruleSettings: '规则设置',
+  connectionDetails: '连接详情',
+  customTheme: '自定义主题',
   unavailableProxy: '隐藏不可用节点',
   protocolTips:
     '您正在尝试连接一个http后端但zashboard是通过https提供的，这可能会导致连接错误，请在浏览器设置中允许不安全的内容，或者使用http版本面板例如http://board.zash.run.place',
@@ -149,9 +156,9 @@ const zh: LANG_MESSAGE = {
   manual: '手动',
   tableWidthMode: '表格宽度模式',
   testFailed: '测速超时',
-  testFinishedTip: "{name}{'@'}{url} \n{number}/{total} 测试完成",
-  testFinishedResultTip: "{name}{'@'}{url} \n测试完成: {success} 成功，{failed} 超时",
-  testFailedTip: "{name}{'@'}{url} \n测速超时",
+  testFinishedTip: '{name}\n{number}/{total} 测试完成',
+  testFinishedResultTip: '{name}\n测试完成: {success} 成功，{failed} 超时',
+  testFailedTip: '{name}\n测速超时',
   updateFinishedTip: '{number} 更新完成',
   independentLatencyTest: '独立延迟测试',
   independentLatencyTestTip:
@@ -180,11 +187,12 @@ const zh: LANG_MESSAGE = {
   aliveTotal: '可用 / 总数',
   displaySelectedNode: '显示选中节点',
   displayLatencyNumber: '显示延迟数字',
-  tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复urltest/fallback/smart行为',
+  tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复{type}行为',
   remoteAddress: '远端地址',
   themeName: '主题名称',
   save: '保存',
   moreDetails: '更多详情',
+  moreSettings: '更多设置',
   customIcon: '自定义图标',
   disablePullToRefresh: '禁用下拉刷新',
   disablePullToRefreshTip:
@@ -215,8 +223,8 @@ const zh: LANG_MESSAGE = {
   autoDisconnectIdleUDPTip:
     '启用后，打开zashboard时将关闭持续时间超过配置分钟数的UDP连接，这可能对某些无法正常自动断开的UDP连接带来帮助。(这是作者自己的私货，你大概率不需要打开它)',
   customGlobalNode: '自定义全局节点',
-  proxiesRelationship: '节点关系',
-  displayProxiesRelationship: '显示节点关系',
+  connectionTopology: '连接拓扑',
+  displayConnectionTopology: '显示连接拓扑',
   editBackend: '编辑后端',
   editBackendTitle: '修改后端配置',
   selectBackend: '选择后端',
@@ -239,6 +247,14 @@ const zh: LANG_MESSAGE = {
   groupTestUrlsTip:
     '对于从面板手动触发的测试，此处设置测试链接 > 配置中的链接 > 面板全局测试链接，但是对于UrlTest/Fallback等具有核心内部的定时测速逻辑的组，仍然需要修改配置中的链接，此处仅推荐Selector等场景',
   groupName: '组名',
+  noData: '暂无数据',
+  unknown: '未知',
+  sourceIPAddress: '源IP地址',
+  ruleMatch: '规则匹配',
+  proxyChainEntry: '代理链入口',
+  proxyChainExit: '代理链出口',
+  nodeType: '节点类型',
+  connectionCount: '连接数',
 }
 
 export default zh

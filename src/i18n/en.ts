@@ -15,6 +15,7 @@ const en = {
   upload: 'Upload',
   downloadSpeed: 'Download Speed',
   uploadSpeed: 'Upload Speed',
+  speed: 'Speed',
   memoryUsage: 'Memory Usage',
   version: 'Version',
   noContent: 'No Content',
@@ -88,6 +89,12 @@ const en = {
   bar: 'Bar',
   exportSettings: 'Export Settings',
   importSettings: 'Import Settings',
+  connectionSettings: 'Connection Settings',
+  proxySettings: 'Proxy Settings',
+  logSettings: 'Log Settings',
+  ruleSettings: 'Rule Settings',
+  connectionDetails: 'Connection Details',
+  customTheme: 'Custom Theme',
   unavailableProxy: 'Hide Unavailable Proxies',
   protocolTips:
     'You are trying to connect to an HTTP backend, but zashboard is provided via HTTPS. This may cause connection errors. Please allow insecure content in your browser settings or use the HTTP version of zashboard, such as http://board.zash.run.place.',
@@ -148,9 +155,9 @@ const en = {
   manual: 'Manual',
   tableWidthMode: 'Table Width Mode',
   testFailed: 'Test Failed',
-  testFinishedTip: "{name}{'@'}{url} \n{number}/{total} Test Finished",
-  testFinishedResultTip: "{name}{'@'}{url} \nTest Finished: {success} Success, {failed} Timeout",
-  testFailedTip: "{name}{'@'}{url} \nTest Failed",
+  testFinishedTip: '{name}\n{number}/{total} Test Finished',
+  testFinishedResultTip: '{name}\nTest Finished: {success} Success, {failed} Timeout',
+  testFailedTip: '{name}\nTest Failed',
   updateFinishedTip: '{number} Update(s) Finished',
   independentLatencyTest: 'Independent Latency Test',
   independentLatencyTestTip:
@@ -181,11 +188,12 @@ const en = {
   displaySelectedNode: 'Show Selected Node',
   displayLatencyNumber: 'Show Latency Numbers',
   tipForFixed:
-    'The current policy group is locked to the current node. Run a speed test to restore urltest/fallback behavior.',
+    'The current policy group is locked to the current node. Run a speed test to restore {type} behavior.',
   remoteAddress: 'Remote Address',
   themeName: 'Theme Name',
   save: 'Save',
   moreDetails: 'More Details',
+  moreSettings: 'More Settings',
   customIcon: 'Custom Icon',
   disablePullToRefresh: 'Disable Pull to Refresh',
   disablePullToRefreshTip:
@@ -216,8 +224,8 @@ const en = {
   autoDisconnectIdleUDPTip:
     "When enabled, opening zashboard will close UDP connections that have been idle longer than the configured time. This may help with UDP connections that don't disconnect automatically as expected.",
   customGlobalNode: 'Custom Global Node',
-  proxiesRelationship: 'Proxy Relationships',
-  displayProxiesRelationship: 'Show Proxy Relationships',
+  connectionTopology: 'Connection Topology',
+  displayConnectionTopology: 'Show Connection Topology',
   editBackend: 'Edit Backend',
   editBackendTitle: 'Edit Backend Configuration',
   selectBackend: 'Select Backend',
@@ -240,6 +248,14 @@ const en = {
   groupTestUrlsTip:
     'For manual tests triggered from the panel, set test URLs here > URLs in configuration > Global test URLs, but for groups with UrlTest/Fallback, etc., the URLs in the configuration still need to be modified, So this is only recommended for Selector scenes',
   groupName: 'Group Name',
+  noData: 'No Data',
+  unknown: 'Unknown',
+  sourceIPAddress: 'Source IP Address',
+  ruleMatch: 'Rule Match',
+  proxyChainEntry: 'Proxy Chain Entry',
+  proxyChainExit: 'Proxy Chain Exit',
+  nodeType: 'Node Type',
+  connectionCount: 'Connection Count',
 }
 
 export type LANG_MESSAGE = typeof en

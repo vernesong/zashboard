@@ -74,6 +74,8 @@ export type Rule = {
   payload: string
   proxy: string
   size: number
+  disabled: boolean
+  uuid: string
 }
 
 export type RuleProvider = {
@@ -119,6 +121,7 @@ export type ConnectionRawMessage = {
     specialRules: string
     type: string
     uid: number
+    smartBlock: string
   }
 }
 

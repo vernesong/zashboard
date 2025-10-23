@@ -17,6 +17,7 @@ const ru: LANG_MESSAGE = {
   upload: 'Отправлено',
   downloadSpeed: 'Скорость загрузки',
   uploadSpeed: 'Скорость отдачи',
+  speed: 'Скорость',
   memoryUsage: 'Память',
   version: 'Версия',
   noContent: 'Нет содержимого',
@@ -90,6 +91,12 @@ const ru: LANG_MESSAGE = {
   bar: 'Полоса',
   exportSettings: 'Экспорт настроек',
   importSettings: 'Импорт настроек',
+  connectionSettings: 'Настройки подключения',
+  proxySettings: 'Настройки прокси',
+  logSettings: 'Настройки журнала',
+  ruleSettings: 'Настройки правил',
+  connectionDetails: 'Детали подключения',
+  customTheme: 'Пользовательская тема',
   unavailableProxy: 'Скрыть недоступное',
   protocolTips:
     'Вы пытаетесь подключиться к HTTP-бэкенду, но Zashboard предоставляется через HTTPS. Это может вызвать ошибки подключения. Разрешите небезопасный контент в настройках браузера или используйте HTTP-версию панели, например, http://board.zash.run.place.',
@@ -150,9 +157,9 @@ const ru: LANG_MESSAGE = {
   manual: 'Ручной',
   tableWidthMode: 'Режим ширины таблицы',
   testFailed: 'Тест задержки таймаут',
-  testFinishedTip: "{name}{'@'}{url} \n{number}/{total} Тест завершен",
-  testFinishedResultTip: "{name}{'@'}{url} \nТест завершен: {success} Успешно, {failed} Таймаут",
-  testFailedTip: "{name}{'@'}{url} \nТест задержки таймаут",
+  testFinishedTip: '{name}\n{number}/{total} Тест завершен',
+  testFinishedResultTip: '{name}\nТест завершен: {success} Успешно, {failed} Таймаут',
+  testFailedTip: '{name}\nТест задержки таймаут',
   updateFinishedTip: '{number} Обновление завершено',
   independentLatencyTest: 'Независимый тест задержки',
   independentLatencyTestTip:
@@ -183,11 +190,12 @@ const ru: LANG_MESSAGE = {
   displaySelectedNode: 'Отображать выбранный узел',
   displayLatencyNumber: 'Отображать задержку',
   tipForFixed:
-    'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
+    'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение {type}.',
   remoteAddress: 'удалённый адрес',
   themeName: 'Название темы',
   save: 'Сохранить',
   moreDetails: 'Подробнее',
+  moreSettings: 'Дополнительные настройки',
   customIcon: 'Пользовательская иконка',
   disablePullToRefresh: 'Отключить свойство обновления',
   disablePullToRefreshTip:
@@ -218,8 +226,8 @@ const ru: LANG_MESSAGE = {
   autoDisconnectIdleUDPTip:
     'При включении открытие zashboard приведёт к закрытию UDP-соединений, продолжительность которых превышает заданное количество минут. Это может помочь в случае с некоторыми UDP-соединениями, которые не разрываются автоматически, как ожидается.',
   customGlobalNode: 'Пользовательский глобальный узел',
-  proxiesRelationship: 'Отношение прокси',
-  displayProxiesRelationship: 'Показать отношение прокси',
+  connectionTopology: 'Топология соединений',
+  displayConnectionTopology: 'Показать топологию соединений',
   editBackend: 'Редактировать бэкенд',
   editBackendTitle: 'Редактировать конфигурацию бэкенда',
   selectBackend: 'Выберите бэкенд',
@@ -242,6 +250,14 @@ const ru: LANG_MESSAGE = {
   groupTestUrlsTip:
     'Для ручных тестов, запущенных из панели, установите тестовые URL > URL в конфигурации > Глобальные тестовые URL, но для групп с UrlTest/Fallback и т.д., URL в конфигурации все равно нужно изменить, поэтому это рекомендуется только для Selector и т.д. ',
   groupName: 'Группа имени',
+  noData: 'Нет данных',
+  unknown: 'Неизвестно',
+  sourceIPAddress: 'Исходный IP-адрес',
+  ruleMatch: 'Совпадение правила',
+  proxyChainEntry: 'Вход в цепочку прокси',
+  proxyChainExit: 'Выход из цепочки прокси',
+  nodeType: 'Тип узла',
+  connectionCount: 'Количество соединений',
 }
 
 export default ru

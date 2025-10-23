@@ -141,7 +141,7 @@ useKeyboard()
     <RouterView />
     <div
       ref="toast"
-      class="toast-sm toast toast-end toast-top z-9999 max-w-96 text-sm md:translate-y-8"
+      class="toast-sm toast toast-end toast-top z-9999 max-w-80 text-sm md:max-w-96 md:translate-y-8"
     />
   </div>
 </template>
