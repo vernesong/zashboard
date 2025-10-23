@@ -57,6 +57,11 @@ export const fetchVersionAPI = () => {
 }
 export const isSingBox = computed(() => version.value?.includes('sing-box'))
 export const zashboardVersion = ref(__APP_VERSION__)
+export interface NodeRank {
+  Name: string
+  Rank: string
+  Weight: number
+}
 
 watch(
   activeBackend,
@@ -110,7 +115,7 @@ export const fetchProxyGroupLatencyAPI = (proxyName: string, url: string, timeou
 export const fetchSmartWeightsAPI = () => {
   return axios.get<{
     message: string
-    weights: Record<string, Record<string, string>>
+    weights: Record<string, NodeRank[]>
   }>(`/group/weights`)
 }
 
@@ -118,7 +123,7 @@ export const fetchSmartWeightsAPI = () => {
 export const fetchSmartGroupWeightsAPI = (proxyName: string) => {
   return axios.get<{
     message: string
-    weights: Record<string, string>
+    weights: NodeRank[]
   }>(`/group/${encodeURIComponent(proxyName)}/weights`)
 }
 

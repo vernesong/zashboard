@@ -64,13 +64,11 @@ const getRenderProxies = (proxies: string[], groupName?: string) => {
   }
 
   if (useSmartGroupSort.value && smartWeightsMap.value[groupName!]) {
-    const smartGroupSort = ['MostUsed', 'OccasionalUsed', 'RarelyUsed']
-
-    return proxies.sort((prev, next) => {
-      return (
-        smartGroupSort.indexOf(smartWeightsMap.value[groupName!]![prev]!) -
-        smartGroupSort.indexOf(smartWeightsMap.value[groupName!]![next]!)
-      )
+    const orderArr = smartWeightsMap.value[groupName!].map(item => item.Name)
+    return proxies.sort((a, b) => {
+      const ia = orderArr.indexOf(a)
+      const ib = orderArr.indexOf(b)
+      return (ia === -1 ? Number.MAX_SAFE_INTEGER : ia) - (ib === -1 ? Number.MAX_SAFE_INTEGER : ib)
     })
   }
 
