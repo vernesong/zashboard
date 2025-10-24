@@ -1,4 +1,4 @@
-import { blockconnectByIdAPI, disconnectByIdAPI } from '@/api'
+import { blockConnectionByIdAPI, disconnectByIdAPI } from '@/api'
 import { useBounceOnVisible } from '@/composables/bouncein'
 import { useConnections } from '@/composables/connections'
 import {
@@ -151,7 +151,7 @@ export default defineComponent<{
                 class="btn btn-circle btn-xs"
                 onClick={(e) => {
                   e.stopPropagation()
-                  blockconnectByIdAPI(conn.id)
+                  blockConnectionByIdAPI(conn.id)
                 }}
               >
                 <NoSymbolIcon class="h-4 w-4" />

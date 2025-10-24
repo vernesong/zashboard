@@ -4,7 +4,16 @@ import { getUrlFromBackend } from '@/helper/utils'
 import router from '@/router'
 import { autoUpgradeCore, checkUpgradeCore } from '@/store/settings'
 import { activeBackend, activeUuid } from '@/store/setup'
-import type { Backend, Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
+import type {
+  Backend,
+  Config,
+  DNSQuery,
+  NodeRank,
+  Proxy,
+  ProxyProvider,
+  Rule,
+  RuleProvider,
+} from '@/types'
 import axios, { AxiosError } from 'axios'
 import { debounce } from 'lodash'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
@@ -164,7 +173,7 @@ export const updateRuleProviderAPI = (name: string) => {
   return axios.put(`/providers/rules/${encodeURIComponent(name)}`)
 }
 
-export const blockconnectByIdAPI = (id: string) => {
+export const blockConnectionByIdAPI = (id: string) => {
   return axios.delete(`/connections/smart/${id}`)
 }
 
